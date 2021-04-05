@@ -38,7 +38,8 @@ insert_payload(RAW_CODE_FILE, LOADER_TEMPLATE, GEN_CODE)
 
 print('Compiling generated code...')
 
-compiler = sb.Popen(["x86_64-w64-mingw32-g++", GEN_CODE, '-o', LOADER_EXE])
+compiler = sb.Popen(["x86_64-w64-mingw32-g++", GEN_CODE,
+                     '-o', LOADER_EXE, '-static-libstdc++'])
 
 if compiler.wait() != 0:
     print('Error compiling generated code!')
