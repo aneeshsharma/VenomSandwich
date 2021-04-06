@@ -1,14 +1,15 @@
 #include <windows.h>
 #include <iostream>
 
+using namespace std;
+
 int main(int argc, char **argv)
 {
-
     ShowWindow(GetConsoleWindow(), SW_HIDE);
 
-    int b[] = {__CODE_HERE__};
-
-    char c[sizeof b];
+    unsigned char b[] = {__CODE_HERE__};
+    int x;
+    unsigned char c[sizeof b];
 
     for (int i = 0; i < sizeof b; i++)
     {

