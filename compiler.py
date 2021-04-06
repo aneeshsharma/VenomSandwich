@@ -10,7 +10,7 @@ def compile_code(src_code, output_file):
         return False
 
     compiler = sb.Popen(["x86_64-w64-mingw32-g++", src_code,
-                         '-o', "loader.o",
+                         '-o', output_file,
                          "-static",
                          "-lpthread"]
                         )
@@ -19,10 +19,10 @@ def compile_code(src_code, output_file):
         print('Error compiling object')
         return False
 
-    compiler = sb.Popen(["x86_64-w64-mingw32-ld",
-                         "-o", output_file,
-                         "loader.o",
-                         "icon.res"])
+    # compiler = sb.Popen(["x86_64-w64-mingw32-ld",
+    #                      "-o", output_file,
+    #                      "loader.o",
+    #                      "icon.res"])
 
     if compiler.wait() != 0:
         print('Error creating exe')

@@ -10,11 +10,7 @@ LPORT = '9500'
 
 RAW_CODE_FILE = 'reverse_tcp_raw.bin'
 
-<<<<<<< HEAD
-ENCODED_CODE_FILE = 'reverse_tcp_enc.txt'
-=======
 ENCRYPTED_CODE_FILE = 'reverse_tcp_enc.bin'
->>>>>>> 5cd7a1ec5bda656dc9094c7eedbcb9a271cd54c7
 
 ENCRYPTED_CODE_FILE = "reverse_tcp_encr.txt"
 KEY = 'x'
