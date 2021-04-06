@@ -130,5 +130,7 @@ dmypy.json
 
 # CPP code
 *.cpp
-*.exe
+
 *.bin
+
+*.exe
