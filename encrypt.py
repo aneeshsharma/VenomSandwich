@@ -2,16 +2,10 @@ import sys
 
 
 def encrypt(src_filename, dest_filename, key):
-    src_file = open(src_filename, 'rb')
-    dst_file = open(dest_filename, 'wb')
-    key = int(ord(key))
-
-    src_data = src_file.read()
-
-    dst_data = b''
-
-    for s in src_data:
-        dst_data += bytes(chr(s ^ key), 'UTF-8')
-
-   # print(enc_string)
-    dst_file.write(dst_data)
+    plain_text = open(src_filename, 'rb').read()
+    key = bytes(key, 'utf-8')
+    len_key = len(key)
+    encoded = []
+    for i in range(0, len(plain_text)):
+        encoded.append(plain_text[i] ^ key[i % len_key])
+    open(dest_filename, 'wb').write(bytes(encoded))

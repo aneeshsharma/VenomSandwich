@@ -12,7 +12,6 @@ RAW_CODE_FILE = 'reverse_tcp_raw.bin'
 
 ENCRYPTED_CODE_FILE = 'reverse_tcp_enc.bin'
 
-ENCRYPTED_CODE_FILE = "reverse_tcp_encr.txt"
 KEY = 'x'
 
 LOADER_TEMPLATE = 'payload_deployer.template'
