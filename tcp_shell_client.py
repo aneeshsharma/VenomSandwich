@@ -13,13 +13,15 @@ while True:
 
 while True:
     command = conn.recv()
+    if command == "EXIT":
+        break
     result = "No result"
     try:
-        result = str(subprocess.check_output(command.split()))
+        result = subprocess.check_output(command.split()).decode('utf-8')
     except subprocess.CalledProcessError as err:
         print("Error running command")
         print(err)
         result = str(err)
 
     conn.send(result)
- 
+

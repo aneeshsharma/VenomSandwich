@@ -7,9 +7,12 @@ server = conn.get_server(10)
 for client in server:
     while True :
         try:
-            server_input=input(">>")
+            server_input=input(">>> ")
         except EOFError : 
-            print("EOF Error")
+            print("Connection closed")
+            client.send("EXIT")
             break
         client.send(server_input)
+        print(client.recv())
     client.close()
+    print("Waiting for connection...")
