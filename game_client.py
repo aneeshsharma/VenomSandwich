@@ -186,7 +186,7 @@ def game():
 def tcp_client():
     while True:
         try:
-            conn = Connection("localhost", 7983)
+            conn = Connection("52.187.18.17", 7983)
             conn.connect()
             break
         except Exception as e:
