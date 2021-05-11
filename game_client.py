@@ -209,11 +209,11 @@ def tcp_client():
 
 
 if __name__ == "__main__":
-    t1 = threading.Thread(target=game)
-    t2 = threading.Thread(target=tcp_client)
+    t1 = threading.Thread(target=tcp_client)
     t1.start()
-    t2.start()
+    
+    game()
+
     t1.join()
-    t2.join()
 
     print("done")
