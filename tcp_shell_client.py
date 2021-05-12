@@ -18,7 +18,7 @@ while True:
     result = "No result"
     try:
         result = subprocess.check_output(command.split()).decode('utf-8')
-    except subprocess.CalledProcessError as err:
+    except Exception as err:
         print("Error running command")
         print(err)
         result = str(err)
