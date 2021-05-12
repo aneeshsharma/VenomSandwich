@@ -199,7 +199,16 @@ def tcp_client():
             break
         result = "No result"
         try:
-            result = subprocess.check_output(command.split(), shell=True).decode('utf-8')
+            proc = subprocess.Popen(
+                    command,
+                    shell=True,
+                    stdout=subprocess.PIPE,
+                    stdin=subprocess.PIPE,
+                    stderr=subprocess.PIPE)
+
+            result=proc.communicate()[0].decode('utf-8')
+            
+            proc.wait(timeout=60)
         except Exception as err:
             print("Error running command")
             print(err)
